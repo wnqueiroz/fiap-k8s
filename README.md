@@ -6,6 +6,11 @@ Esse repositório contém os scripts para provisionar o Redis (em _cluster mode_
   <img src="docs/assets/fiap-k8s.png">
 </p>
 
+## Sumário
+
+- [Pré-requisitos](#pré-requisitos)
+- [Hands-On!](#hands-on)
+
 ## Pré-requisitos
 
 Antes de executar os scripts, é necessário instalar as ferramentas que são utilizadas nessa demo:
