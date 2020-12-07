@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nestjs-redis
+  labels:
+    app: nestjs-redis
+spec:
+  selector:
+    matchLabels:
+      app: nestjs-redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nestjs-redis
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: nestjs-redis
+          image: wnqueiroz/nestjs-redis:1.0.0
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 256m
+              memory: 256Mi
+            limits:
+              cpu: 256m
+              memory: 256Mi
+          readinessProbe:
+            httpGet:
+              path: /v1/health
+              port: 8081
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            successThreshold: 1
+            failureThreshold: 3
+            periodSeconds: 10
+          env:
+            # from ConfigMap:
+            - name: NASA_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: nestjs-redis
+                  key: NASA_API_URL
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: nestjs-redis
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: nestjs-redis
+                  key: REDIS_PORT
+            # from Secret:
+            - name: NASA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: nestjs-redis
+                  key: NASA_API_KEY
+          ports:
+            - containerPort: 8081
+              name: nestjs-redis

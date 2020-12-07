@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nestjs-redis
+data:
+  NASA_API_URL: https://api.nasa.gov
+  REDIS_HOST: redis-master.redis.svc.cluster.local
+  REDIS_PORT: '6379'
