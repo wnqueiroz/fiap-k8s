@@ -17,7 +17,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: nestjs-redis
-          image: wnqueiroz/nestjs-redis:1.0.0
+          image: wnqueiroz/nestjs-redis:1.0.1
           imagePullPolicy: Always
           resources:
             requests:
